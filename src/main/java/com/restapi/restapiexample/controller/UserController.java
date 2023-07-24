@@ -1,7 +1,10 @@
 package com.restapi.restapiexample.controller;
 
 import com.restapi.restapiexample.model.User;
+import com.restapi.restapiexample.response.ResponseHandler;
 import com.restapi.restapiexample.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +18,8 @@ public class UserController {
     }
 
     @GetMapping("{userId}")
-    public User getUserDetail(@PathVariable("userId") String userId) {
-        return userService.getUser(userId);
+    public ResponseEntity<Object>  getUserDetail(@PathVariable("userId") String userId) {
+        return ResponseHandler.responseBuilder("Requested user details", HttpStatus.OK, userService.getUser(userId));
     }
 
     @GetMapping()
