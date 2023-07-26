@@ -11,15 +11,15 @@ public class User {
 
     @Id
     private String userId;
-    private String UserName;
-    private String UserAddress;
-    private String UserPhone;
+    private String userName;
+    private String userAddress;
+    private String userPhone;
 
     public User(String userId, String userName, String userAddress, String userPhone) {
         this.userId = userId;
-        UserName = userName;
-        UserAddress = userAddress;
-        UserPhone = userPhone;
+        this.userName = userName;
+        this.userAddress = userAddress;
+        this.userPhone = userPhone;
     }
 
     public User() {
@@ -30,15 +30,15 @@ public class User {
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
     public void setUserAddress(String userAddress) {
-        UserAddress = userAddress;
+        this.userAddress = userAddress;
     }
 
     public void setUserPhone(String userPhone) {
-        UserPhone = userPhone;
+        this.userPhone = userPhone;
     }
 
 
@@ -47,15 +47,15 @@ public class User {
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public String getUserAddress() {
-        return UserAddress;
+        return userAddress;
     }
 
     public String getUserPhone() {
-        return UserPhone;
+        return userPhone;
     }
 
 }

@@ -47,4 +47,10 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsers() {
         return userRepository.findAll();
     }
+
+    @Override
+    public List<User> getByUserName(String userName)
+    {
+        return userRepository.findByUserName(userName);
+    }
 }
