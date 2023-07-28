@@ -6,15 +6,19 @@ import com.restapi.restapiexample.service.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Answers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.configuration.IMockitoConfiguration;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 class UserServiceImplTest {
@@ -57,6 +61,10 @@ class UserServiceImplTest {
 
     @Test
     void deleteUser() {
+        mock(User.class);
+        mock(UserRepository.class, Mockito.CALLS_REAL_METHODS);
+        doAnswer(Answers.CALLS_REAL_METHODS).when(userRepository).deleteById(any());
+        assertThat(userService.deleteUser("1")).isEqualTo("Success");
     }
 
     @Test
@@ -70,5 +78,23 @@ class UserServiceImplTest {
 
     @Test
     void getUsers() {
+        mock(User.class);
+        mock(UserRepository.class);
+
+        when(userRepository.findAll()).thenReturn(new ArrayList<User>(Collections.singleton(user)));
+        assertThat(userService.getUsers().get(0)).isEqualTo(user);
+    }
+
+    @Test
+    void getByUserName() {
+        mock(User.class);
+        mock(UserRepository.class);
+
+        when(userRepository.findByUserName("Raj")).thenReturn(
+                new ArrayList<User>(Collections.singleton(user))
+        );
+        assertThat(userService.getByUserName("Raj").get(0)).isEqualTo(user);
+        assertThat(userService.getByUserName("Raj").get(0).getUserId()).isEqualTo(user.getUserId() );
+
     }
 }
