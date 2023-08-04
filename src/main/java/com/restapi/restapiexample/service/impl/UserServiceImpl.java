@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser(String userId) {
         if(userRepository.findById(userId).isEmpty())
-            throw new UserNotFoundException("Requested User not found!");
+            throw new UserNotFoundException("Requested User not found in DataBase !!.");
         return userRepository.findById(userId).get();
     }
 
